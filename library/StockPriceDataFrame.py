@@ -8,10 +8,24 @@ class StockPriceDataFrame:
         self.__price_dataframe = self.__initialize_dateframe(date, open, high, low, close, volume)
 
 
+    def __init__(self, dataframe):
+        self.__price_dataframe = self.__process_dataframe(dataframe)
+
+
     def get_content(self):
         return self.__price_dataframe
 
     
+    def __process_dataframe(self, dataframe):
+        dataframe.columns = ['Date', 'Open', 'High', 'Low', 'Close']
+
+        date = pd.to_datetime(dataframe['Date'], unit='s')
+        dataframe = dataframe.drop('Date', axis=1)
+        dataframe.index = date
+
+        return dataframe
+
+
     def __initialize_dateframe(self, date, open, high, low, close, volume=[]):
         is_volume = False
 
