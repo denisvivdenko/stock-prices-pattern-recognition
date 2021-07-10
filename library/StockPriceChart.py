@@ -1,4 +1,3 @@
-from matplotlib.pyplot import savefig
 import mplfinance as fplt
 import pandas as pd
 import numpy as np

@@ -2,7 +2,9 @@ from StockPriceChart import StockPriceChart
 from ChartSegment import ChartSegment
 from StockPriceDataFrame import StockPriceDataFrame
 import sqlite3
+import pandas as pd
 
+pd.set_option('display.max_rows', 2000)
 
 connection = sqlite3.connect("./data/GBPUSD.db")
 
@@ -21,8 +23,6 @@ for row in cursor.execute('SELECT pTime, pOpen, pHigh, pLow, pClose FROM d_2010;
     high.append(row[2])
     low.append(row[3])
     close.append(row[4])
-    
-    count += 1
 
 connection.close()
 
