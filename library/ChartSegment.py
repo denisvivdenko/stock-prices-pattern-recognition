@@ -1,7 +1,6 @@
 import pandas as pd
 import numpy as np
 from pandas.core.indexes.datetimes import date_range
-import mplfinance as fplt
 import sqlite3
 
 
