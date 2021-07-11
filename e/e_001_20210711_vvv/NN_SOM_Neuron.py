@@ -7,6 +7,7 @@ import random
 
 class NN_SOM_Neuron():
   '''Нейрон мережі SOM.'''
+  
   def __init__(self, x, y, num_w = 3):
     '''Ініціалізація нейрону:
       x,y - координати нейрону у середині мережі
@@ -27,7 +28,7 @@ class NN_SOM_Neuron():
       dist_sqr += (vector[i] - self.a_weights[i])**2
     return dist_sqr
 
-  def adjustWeights(self, vector, learning_rate, influence):
+  def setCorrectWeights(self, vector, learning_rate, influence):
     '''Корекція вагів вузла у напрямку вектора
     :param vector array: сам вектор
     :param learning_rate real: коефіцієнт навчання
