@@ -10,6 +10,7 @@ from ChartSegment import ChartSegment
 from StockPriceDataFrame import StockPriceDataFrame
 import os
 
+segment_size = 20
 
 connection = sqlite3.connect('./data/GBPUSD.db')
 df = pd.read_sql_query("SELECT * FROM result_table_2010", connection, parse_dates=True)
@@ -33,15 +34,18 @@ for pattern_class in classes:
         os.makedirs(folder_name)
 
     for timestamp in timestamps_data:
-        start_date = str(pd.to_datetime(timestamp, unit='s'))
-        end_date = str(pd.to_datetime(str(int(timestamp) + 19 * 30 * 60), unit='s'))
+        start_date = pd.to_datetime(timestamp, unit='s')
+        # end_date = str(pd.to_datetime(str(int(timestamp) + 19 * 30 * 60), unit='s'))
 
-        segment = ChartSegment(stock_price_df, start_date=start_date, end_date=end_date,
-                    frequency='30T')
-        
+        # segment = ChartSegment(stock_price_df, start_date=start_date, end_date=end_date,
+        #             frequency='30T')
+ 
+        segment = stock_price_df[stock_price_df.index > start_date].head(segment_size)
+        print(segment)
+
         file_name = folder_name + '\\chart_' + timestamp + '.png'
 
-        stream = StockPriceChart(segment.get_content())
+        stream = StockPriceChart(segment)
         stream.save_chart_image(file_path=file_name) 
 
         count += 1
