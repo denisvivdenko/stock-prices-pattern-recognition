@@ -1,6 +1,6 @@
-from StockPriceChart import StockPriceChart
-from ChartSegment import ChartSegment
-from StockPriceDataFrame import StockPriceDataFrame
+from library.StockPriceChart import StockPriceChart
+from library.ChartSegment import ChartSegment
+from library.StockPriceDataFrame import StockPriceDataFrame
 import sqlite3
 import pandas as pd
 
