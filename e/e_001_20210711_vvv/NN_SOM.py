@@ -36,8 +36,8 @@ class NN_SOM():
       self.r_map_radius = self.i_y_cells / 2.0
     self.r_time_constant = 1.0 * self.i_iterations / math.log(self.r_map_radius)
 
-  def getNormalizeData(self, a):
-    '''Нормалізація даних масиву на проміжку [0.0;1.0]'''
+  def getNormalizeDataRow(self, a):
+    '''Нормалізація даних масиву на проміжку [0.0;1.0] по рядках'''
     ret = []
     for y in range(len(a)):
       __min = min(a[y])
