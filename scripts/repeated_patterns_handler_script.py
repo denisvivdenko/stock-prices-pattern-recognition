@@ -72,3 +72,5 @@ if __name__ == "__main__":
     save_plots(connection, result)
     print(result)
 
+    connection.close()
+
