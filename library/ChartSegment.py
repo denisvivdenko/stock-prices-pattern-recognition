@@ -1,7 +1,5 @@
 import pandas as pd
-import numpy as np
 from pandas.core.indexes.datetimes import date_range
-import sqlite3
 
 
 class ChartSegment:

@@ -1,12 +1,11 @@
-import pandas as pd
-import numpy as np
+from library.Chart import Chart
 import matplotlib.pyplot as plt
-import matplotlib
 
 
-class MeanStockPriceLinePlot:
+class MeanStockPriceLinePlot(Chart):
 
     def __init__(self, stock_prices, linewidth=5):
+        super().__init__()
         self.stock_prices = stock_prices
         self.linewidth = linewidth
 
@@ -17,10 +16,4 @@ class MeanStockPriceLinePlot:
         plt.xticks(rotation=45)
         figure = plt.plot(mean_stock_prices.index, mean_stock_prices.values, linewidth=self.linewidth)
         
-        plt.savefig(file_path)
-        print('file has been saved: ', file_path)
-        
-        matplotlib.use("Agg")
-        plt.close('all')
-
-        del figure
+        super().save_plot(file_path=file_path, figure=figure)
