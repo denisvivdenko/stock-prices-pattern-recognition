@@ -5,7 +5,7 @@ class WindowsGroupLinker:
 
     def __init__(self, groups_info: pd.DataFrame, windows: list):
         '''
-        param groups: groups data with "timestamp" column as index and "class" column as class identifier
+        param groups_info: groups data with "timestamp" column as index and "class" column as class identifier
         param windows: list of windows that have to be linked to a particular group
         '''
 
@@ -26,9 +26,9 @@ class WindowsGroupLinker:
             window_data = window.get_content()
             window_first_timestamp = window_data.index[0]
 
-            window_group = groups_info.loc[groups_info.index == window_first_timestamp, 'class']
+            window_group = groups_info.loc[groups_info.index == window_first_timestamp, 'class'].values[0]
 
-            grouped_data[window_group] = window_data
+            grouped_data[window_group].append(window_data)
 
         return grouped_data
 

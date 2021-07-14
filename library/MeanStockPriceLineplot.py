@@ -15,5 +15,5 @@ class MeanStockPriceLinePlot(Chart):
 
         plt.xticks(rotation=45)
         figure = plt.plot(mean_stock_prices.index, mean_stock_prices.values, linewidth=self.linewidth)
-        
         super().save_plot(file_path=file_path, figure=figure)
+        super().remove_garbage(figure)

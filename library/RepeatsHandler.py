@@ -59,7 +59,7 @@ class RepeatsHandler():
 
         for current_timestamp in data.index[1:]:
 
-            timestamps_difference = int(current_timestamp) - int(previous_timestamp)
+            timestamps_difference = current_timestamp.timestamp() - previous_timestamp.timestamp()
 
             if timestamps_difference == self.timestamps_period:
                 clusters[cluster_number].append(current_timestamp)
