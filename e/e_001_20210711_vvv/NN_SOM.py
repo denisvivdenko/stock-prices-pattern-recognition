@@ -4,7 +4,7 @@
 Self Organized Map
 '''
 from NN_SOM_Neuron import NN_SOM_Neuron
-import math, random, copy
+import math, copy, random
 
 class NN_SOM():
   '''NN_SOM'''
@@ -80,7 +80,9 @@ class NN_SOM():
     return tmp_min_ind
 
   def TrainAll(self, a_nn, a_r):
-    '''Навчання мережі'''
+    '''Навчання мережі
+    a_nn - масив нейронів
+    a_r - масив нормалізованих даних'''
     tmp_learning_rate = self.r_initial_learning_rate
     '''Тимчасове експоненційне зниження коефіцієнту навчання'''
     i_iter_now = 0
