@@ -78,7 +78,7 @@ class NN_SOM():
         if __height == 0.0:
           ret2.append(0.5)
           continue
-        elif a[y][x] == __min:
+        elif data[y][x] == __min:
           ret2.append(0.0)
           continue
         else:
@@ -130,7 +130,7 @@ class NN_SOM():
         a_nn[i].setCorrectWeights(a_vector, self.r_initial_learning_rate, r_influence)
     self.r_initial_learning_rate = self.r_initial_learning_rate * math.exp(-1.0 * self.i_iter_now / self.i_iterations)
     self.i_iter_now += 1
-    return copy.deepcopy(a_nn)
+    return a_nn
 
   def TrainAll(self, a_nn, a_r):
     '''Тренування мережі
