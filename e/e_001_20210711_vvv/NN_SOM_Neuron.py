@@ -16,9 +16,7 @@ class NN_SOM_Neuron():
     '''Координата нейрону/класу по осі X'''
     self.i_y = y
     '''Координата нейрону/класу по осі Y'''
-    self.i_num_weights = num_w
-    '''Кількість вагів у нейроні або вузлі'''
-    self.a_weights = [random.random() for i in range(self.i_num_weights)]
+    self.a_weights = [random.random() for i in range(num_w)]
     '''Масив вагів на проміжку [0.0;1.0)'''
 
   def getCalculateDistance(self, vector):
