@@ -1,0 +1,18 @@
+python -m scripts --d1 "./data/GBPUSD.db" --t1 "result_table_2010" --t1_time_col "time_name_pattern" --t1_class_col "numClass" --d2 "./data/GBPUSD.db" --t2 "d_2010" --t2_time_col "pTime" --t2_open_col "pOpen" --t2_high_col "pHigh" --t2_low_col "pLow" --t2_close_col "pClose" --candles 20 --timestamp_period 1800
+
+
+
+@click.command()
+@click.option('--d1')
+@click.option('--t1')
+@click.option('--t2_time_col')
+@click.option('--t2_class_col')
+@click.option('--d2')
+@click.option('--t2')
+@click.option('--t2_time_col', default='Timestamp')
+@click.option('--t2_open_col', default='Open')
+@click.option('--t2_high_col', default='High')
+@click.option('--t2_low_col', default='Low')
+@click.option('--t2_close_col', default='Close')
+@click.option('--candles', default=20)
+@click.option('--timestamp_period', default=30*60)
