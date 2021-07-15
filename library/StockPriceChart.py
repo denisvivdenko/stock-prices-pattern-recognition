@@ -1,19 +1,22 @@
-from library.Chart import Chart
+from library.Plot import Plot
 import mplfinance as fplt
 import matplotlib.pyplot as plt
 
 
-class StockPriceChart(Chart):
-
-    def __init__(self, stock_price_data):
-        self.super_class = super().__init__()
-        self.stock_price_data = stock_price_data
+class StockPriceChart(Plot):
 
 
-    def save_chart_image(self, file_path):
-        figure = fplt.plot(self.stock_price_data, type='candle', 
-                            returnfig=True, savefig=file_path)
-        super().remove_garbage(figure)
+    def __init__(self, data=None):
+        self.plot = super().__init__(data)
+
+
+    def set_data(self, new_data):
+        return StockPriceChart(new_data)
+
+
+    def save_plot(self, file_path):
+        figure = fplt.plot(self.plot.data, type='candle', returnfig=True, savefig=file_path)
+        self.plot.remove_garbage(figure)
 
         
 

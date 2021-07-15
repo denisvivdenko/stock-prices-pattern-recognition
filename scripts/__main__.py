@@ -1,3 +1,4 @@
+import matplotlib
 from library.Window import Window
 from library.WindowsGroupLinker import WindowsGroupLinker
 from library.RepeatsHandler import RepeatsHandler
@@ -6,16 +7,11 @@ from library.StockPriceChart import StockPriceChart
 import pandas as pd
 import sqlite3
 from library.StockPriceDataFrame import StockPriceDataFrame
+from library.Plot import Plot
 import os
 
-segment_size = 20
 
-connection = sqlite3.connect('./data/GBPUSD.db')
-df = pd.read_sql_query("SELECT * FROM result_table_2010", connection, parse_dates=True)
-df = df.rename({'time_name_pattern': 'timestamp', 'numClass': 'class'}, axis=1)
-
-
-def save_plots(data: dict):
+def save_plots(data: dict, plot: Plot):
 
     count = 0
     for pattern_class, windows in data.items():
@@ -27,13 +23,10 @@ def save_plots(data: dict):
         for window in windows:
 
             first_timestamp = str(int(window.index[0].timestamp()))
-            file_name = folder_name + '\\chart_' + first_timestamp + '.png'
+            file_path = folder_name + '\\chart_' + first_timestamp + '.png'
 
-            # stream = StockPriceChart(window)
-            # stream.save_chart_image(file_path=file_name) 
-
-            stream = MeanStockPriceLinePlot(window, linewidth=10)
-            stream.save_chart_image(file_name)
+            window_plot = plot.set_data(window)
+            window_plot.save_plot(file_path)
 
             count += 1
             print('total', str(count))
@@ -64,4 +57,4 @@ if __name__ == '__main__':
 
     linked_windows_groups = windows_group_linker.get_content()
     
-    save_plots(linked_windows_groups)
+    save_plots(linked_windows_groups, MeanStockPriceLinePlot())
