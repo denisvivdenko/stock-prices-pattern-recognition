@@ -108,5 +108,5 @@ class NN_SOM():
       tmp_learning_rate = self.r_initial_learning_rate * math.exp(-1.0 * i_iter_now / self.i_iterations)
       i_iter_now += 1
       if dbgInfo and i_iter_now%250==0:
-        print('Тренувальна епоха #{:05d} .'.format(i_iter_now))
+        print('Тренувальна епоха #{:05d}'.format(i_iter_now))
     return copy.deepcopy(a_nn)
