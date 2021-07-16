@@ -28,7 +28,6 @@ import click
 def run_script(d1, t1, t1_time_col, t1_class_col,
                 d2, t2, t2_time_col, t2_open_col,
                 t2_high_col, t2_low_col, t2_close_col, candles, timestamp_period):
-    print(d1)
     db1_connection = sqlite3.connect(d1)
     groups_info = pd.read_sql_query(f"SELECT * FROM {t1}", db1_connection, parse_dates=True)
     groups_info = groups_info.rename({t1_time_col: 'timestamp', t1_class_col: 'class'}, axis=1)
@@ -49,7 +48,7 @@ def run_script(d1, t1, t1_time_col, t1_class_col,
     windows_group_linker = WindowsGroupLinker(cleaned_groups_info, windows)
     linked_windows_groups = windows_group_linker.get_content()
     
-    save_plots(linked_windows_groups, MeanStockPriceLinePlot())
+    save_plots(linked_windows_groups, StockPriceChart())
 
 
 def save_plots(data: dict, plot: Plot):
