@@ -25,9 +25,12 @@ import click
 @click.option('--t2_close_col', default='Close')
 @click.option('--candles', default=20)
 @click.option('--timestamp_period', default=30*60)
+@click.option('--save')
 def run_script(d1, t1, t1_time_col, t1_class_col,
                 d2, t2, t2_time_col, t2_open_col,
-                t2_high_col, t2_low_col, t2_close_col, candles, timestamp_period):
+                t2_high_col, t2_low_col, t2_close_col, 
+                candles, timestamp_period, save):
+
     db1_connection = sqlite3.connect(d1)
     groups_info = pd.read_sql_query(f"SELECT * FROM {t1}", db1_connection, parse_dates=True)
     groups_info = groups_info.rename({t1_time_col: 'timestamp', t1_class_col: 'class'}, axis=1)
@@ -48,15 +51,15 @@ def run_script(d1, t1, t1_time_col, t1_class_col,
     windows_group_linker = WindowsGroupLinker(cleaned_groups_info, windows)
     linked_windows_groups = windows_group_linker.get_content()
     
-    save_plots(linked_windows_groups, StockPriceChart())
+    save_plots(linked_windows_groups, StockPriceChart(), save)
 
 
-def save_plots(data: dict, plot: Plot):
+def save_plots(data: dict, plot: Plot, path):
 
-    count = 0
+    count = int()
     for pattern_class, windows in data.items():
 
-        folder_name = 'charts\\class_' + str(pattern_class)
+        folder_name = path + 'charts\\class_' + str(pattern_class)
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
 
@@ -69,7 +72,11 @@ def save_plots(data: dict, plot: Plot):
             window_plot.save_plot(file_path)
 
             count += 1
-            print('total', str(count))
+            print_count_info(pattern_class, count, len(windows))
+
+
+def print_count_info(pattern_class, count, number_windows):
+    print(f"class: {pattern_class}\tcount: {count}/{number_windows}")
 
 
 if __name__ == '__main__':
