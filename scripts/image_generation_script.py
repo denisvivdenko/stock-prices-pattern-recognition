@@ -59,7 +59,7 @@ def save_plots(data: dict, plot: Plot, path):
     count = int()
     for pattern_class, windows in data.items():
 
-        folder_name = path + 'charts\\class_' + str(pattern_class)
+        folder_name ='charts\\class_' + str(pattern_class)
         if not os.path.exists(folder_name):
             os.makedirs(folder_name)
 
