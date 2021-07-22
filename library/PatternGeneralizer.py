@@ -1,3 +1,4 @@
+from matplotlib.pyplot import axis
 import pandas as pd
 import math
 
@@ -16,5 +17,8 @@ class PatternGeneralizer:
         window_size = timeseries.size
         smoothing_window = int(math.ceil(window_size * smoothing_coefficient))
         smoothed_timeseries = timeseries.rolling(window=smoothing_window).mean()
+
+        smoothed_timeseries = smoothed_timeseries.dropna()
+        smoothed_timeseries.index = pd.RangeIndex(0, window_size - smoothing_window + 1)
 
         return smoothed_timeseries
