@@ -3,6 +3,7 @@ import sqlite3
 import matplotlib.pyplot as plt
 from library.StockPriceDataFrame import StockPriceDataFrame
 from library.MotifsFinder import MotifsFinder
+from library.PatternGeneralizer import PatternGeneralizer
 
 
 if __name__ == '__main__':
@@ -22,6 +23,14 @@ if __name__ == '__main__':
     while motifs_finder.is_next():
         motif = motifs_finder.get_motif()
         
+        generalizer = PatternGeneralizer(motif)
+        generalized_pattern = generalizer.get_content()
+
+        plt.figure(figsize=(2, 6))
+        plt.plot(generalized_pattern, linewidth=3)
+        plt.savefig(f'./patterns/pattern_{count}')
+        plt.close()
+
         if motif.empty:
             count_skiped += 1
 

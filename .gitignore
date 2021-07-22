@@ -1,4 +1,5 @@
 charts/
+patterns/
 
 .vscode/*
 *.code-workspace
