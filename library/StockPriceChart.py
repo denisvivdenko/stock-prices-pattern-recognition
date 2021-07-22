@@ -1,6 +1,5 @@
 from library.Plot import Plot
 import mplfinance as fplt
-import matplotlib.pyplot as plt
 
 
 class StockPriceChart(Plot):
