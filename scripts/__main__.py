@@ -19,7 +19,6 @@ if __name__ == '__main__':
 
     motifs_finder = MotifsFinder(one_dimension_timeseries, 20, correlation_threshold=0.95)
 
-
     motifs = []
     count = 0
     while motifs_finder.is_next():
@@ -36,12 +35,12 @@ if __name__ == '__main__':
 
     print(f'before merge: {len(motifs)}/{count}')
     print(f'after merge: {len(distinct_motifs)}')
+    
+    count = 0
+    for motif in distinct_motifs:
 
-
-
-
-        
-# plt.figure(figsize=(2, 6))
-# plt.plot(generalized_pattern, linewidth=3)
-# plt.savefig(f'./patterns/pattern_{count}')
-# plt.close()
+        plt.figure(figsize=(2, 6))
+        plt.plot(motif, linewidth=3)
+        plt.savefig(f'./patterns/pattern_{count}')
+        plt.close()
+        count += 1
