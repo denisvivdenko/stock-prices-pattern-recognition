@@ -3,15 +3,14 @@ import pandas as pd
 
 class Window:
 
+
     def __init__(self, data: pd.DataFrame, first_timestamp, candles_number=20):
         '''param data: must have timestamp as index'''
 
         self._window = self.__get_window(data, first_timestamp, candles_number)
 
-
     def get_content(self):
         return self._window
-
 
     def __get_window(self, data, first_timestamp, candles_number):
         

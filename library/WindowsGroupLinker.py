@@ -3,6 +3,7 @@ import pandas as pd
 
 class WindowsGroupLinker:
 
+
     def __init__(self, groups_info: pd.DataFrame, windows: list):
         '''
         param groups_info: groups data with "timestamp" column as index and "class" column as class identifier
@@ -11,11 +12,9 @@ class WindowsGroupLinker:
 
         self.grouped_windows = self.__group_windows(groups_info=groups_info, windows=windows)
 
-
     def get_content(self):
         return self.grouped_windows
 
-    
     def __group_windows(self, groups_info, windows):
         groups_info = groups_info.copy()
 

@@ -7,6 +7,7 @@ from library.MotifsMerger import MotifsMerger
 
 class MotifsFinder:
 
+
     def __init__(self, timeseries: pd.Series, window_size, correlation_threshold=0.9):
         self.current_motif_index = -1
         self.timeseries = timeseries
@@ -14,7 +15,6 @@ class MotifsFinder:
         self.correlation_threshold = correlation_threshold
         self.matrix_profile = stumpy.stump(timeseries, m=window_size)
         self.motif_indices = np.argsort(self.matrix_profile[:, 0])
-
 
     def get_motif(self):
 
@@ -34,13 +34,11 @@ class MotifsFinder:
 
         return merged_motif
 
-
     def is_next(self):
         if (self.current_motif_index+2) < (self.timeseries.size-1):
             return True
 
         return False
-
 
     def __get_pairwised_motif(self, motif_index):
 

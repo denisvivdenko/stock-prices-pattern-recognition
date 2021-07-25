@@ -8,7 +8,6 @@ class RepeatsHandler():
     def __init__(self, timestamps_period):
         self.timestamps_period = timestamps_period
 
-
     def clear_repeats(self, data: pd.DataFrame):
         '''
         data must have: 
@@ -30,7 +29,6 @@ class RepeatsHandler():
         clean_data = data[data.index.isin(filtred_data)]
         return clean_data.copy()
 
-
     def __filter_repeats(self, clusters: dict):
         '''filters clusters: takes the centred one timestamp from each cluster'''
 
@@ -43,7 +41,6 @@ class RepeatsHandler():
             filtred_timestamps.append(timestamps[filtred_timestamp_index])
 
         return filtred_timestamps
-
 
     def __get_clusters(self, data: pd.DataFrame):
         '''data must have timestamp as its index'''

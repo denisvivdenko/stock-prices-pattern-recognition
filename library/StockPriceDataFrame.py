@@ -4,18 +4,16 @@ import numpy as np
 
 class StockPriceDataFrame:
 
+
     def __init__(self, date, open, high, low, close, volume=[]):
         self.__price_dataframe = self.__initialize_dateframe(date, open, high, low, close, volume)
-
 
     def __init__(self, dataframe):
         self.__price_dataframe = self.__process_dataframe(dataframe)
 
-
     def get_content(self):
         return self.__price_dataframe
 
-    
     def __process_dataframe(self, dataframe):
         dataframe.columns = ['Date', 'Open', 'High', 'Low', 'Close']
 
@@ -24,7 +22,6 @@ class StockPriceDataFrame:
         dataframe.index = date
 
         return dataframe
-
 
     def __initialize_dateframe(self, date, open, high, low, close, volume=[]):
         is_volume = False
@@ -43,7 +40,6 @@ class StockPriceDataFrame:
 
         price_data = pd.DataFrame(data=data, index=date, columns=columns)
         return price_data
-
 
     def __is_datetime_format(self, date):
         if type(date) is not pd.core.indexes.datetimes.DatetimeIndex:

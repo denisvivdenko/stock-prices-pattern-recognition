@@ -4,14 +4,13 @@ import matplotlib.pyplot as plt
 
 class MeanStockPriceLinePlot(Plot):
 
+
     def __init__(self, data=None, linewidth=5):
         self.plot = super().__init__(data)
         self.linewidth = linewidth
 
-
     def set_data(self, new_data):
         return MeanStockPriceLinePlot(new_data)
-
 
     def save_plot(self, file_path):
         
