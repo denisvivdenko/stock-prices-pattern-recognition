@@ -15,6 +15,7 @@ class MotifsFinder:
         self.correlation_threshold = correlation_threshold
         self.matrix_profile = stumpy.stump(timeseries, m=window_size)
         self.motif_indices = np.argsort(self.matrix_profile[:, 0])
+        self.previous_correlation = 1
 
     def get_motif(self):
 
@@ -24,10 +25,11 @@ class MotifsFinder:
         if self.current_motif_index > self.timeseries.size - 1:
             raise Exception('MotifsFinder: index is out of range')
 
-        try:
-            motifs = self.__get_pairwised_motif(self.current_motif_index)
-        except Exception:
+        if self.previous_correlation < self.correlation_threshold:
             return pd.Series()
+
+        motifs, correlation = self.__get_pairwised_motif(self.current_motif_index)
+        self.previous_correlation = correlation
         
         motifs_merger = MotifsMerger(motifs)
         merged_motif = motifs_merger.get_content()
@@ -54,9 +56,5 @@ class MotifsFinder:
         normalized_second_motif = pd.Series(data=normalize([second_motif])[0], index=index)
 
         correlation = normalized_first_motif.corr(normalized_second_motif, method='pearson')
-        print(f"correlation: {correlation}")
 
-        if correlation < self.correlation_threshold:
-            raise Exception('patterns are uncorrelated')
-
-        return [normalized_first_motif, normalized_second_motif]
+        return [normalized_first_motif, normalized_second_motif], correlation

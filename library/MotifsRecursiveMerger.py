@@ -1,17 +1,17 @@
 import pandas as pd
 from library.MotifsMerger import MotifsMerger
 import time
+from numba import jit
 
 
 class MotifsRecursiveMerger:
 
+
     def __init__(self, motifs:list, correlation_threshold=0.95):
         self.distinct_motifs = self.__get_distinct_motifs(motifs, correlation_threshold)
 
-
     def get_content(self):
         return self.distinct_motifs
-
 
     def __get_distinct_motifs(self, motifs, correlation_threshold):
         distinct_motifs = motifs.copy()
@@ -30,8 +30,6 @@ class MotifsRecursiveMerger:
 
         return distinct_motifs
 
-
-
     def __check_correlated_motifs(self, motifs, correlation_threshold):
 
         motifs_count = len(motifs)
@@ -45,7 +43,6 @@ class MotifsRecursiveMerger:
                     return True
 
         return False
-
 
     def __merge_correlated_motifs(self, motifs, correlation_threshold):
         motifs = motifs.copy()

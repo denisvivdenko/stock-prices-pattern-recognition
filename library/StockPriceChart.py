@@ -12,7 +12,7 @@ class StockPriceChart(Plot):
         return StockPriceChart(new_data)
 
     def save_plot(self, file_path):
-        figure = fplt.plot(self.plot.data, type='candle', returnfig=True, savefig=file_path)
+        figure = fplt.plot(self.plot.data, type='candle', returnfig=True, savefig=file_path, style='charles')
         self.plot.remove_garbage(figure)
 
         
