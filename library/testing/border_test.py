@@ -1,7 +1,9 @@
+from library.StockPriceDataFrame import StockPriceDataFrame
 from tkinter import E
 from library.Border import Border
 from library.PriceMovementEnum import PriceMovement
 from library.BorderParser import BorderParser
+from library.StockPriceBorderParser import StockPriceBorderParser, StockPriceDataFrame
 import pandas as pd
 import unittest
 
@@ -59,6 +61,25 @@ class TestBorderCompareAndParserMethod(unittest.TestCase):
                             right_border=[PriceMovement.DOWN, PriceMovement.DOWN])
 
         self.assertEqual(actual.compare_borders(expected), False)
+
+    def test_stock_price_border_parser_true(self):
+        data = [{'Date': 1294012800, 'Open': 13, 'High': 100, 'Low': 20, 'Close': 15}, 
+                {'Date': 1294014600, 'Open': 15, 'High': 100, 'Low': 20, 'Close': 18}, 
+                {'Date': 1294016400, 'Open': 13, 'High': 100, 'Low': 20, 'Close': 14},
+                {'Date': 1294018200, 'Open': 13, 'High': 100, 'Low': 20, 'Close': 14},
+                {'Date': 1294020000, 'Open': 13, 'High': 100, 'Low': 20, 'Close': 14},
+                {'Date': 1294021800, 'Open': 18, 'High': 100, 'Low': 20, 'Close': 14},
+                {'Date': 1294023600, 'Open': 20, 'High': 100, 'Low': 20, 'Close': 14}]
+        stock_price = pd.DataFrame.from_dict(data)
+        stock_price = StockPriceDataFrame(stock_price)
+
+        border_parser = StockPriceBorderParser(stock_price.get_content())
+
+        actual = border_parser.get_content()
+        expected = Border(left_border=[PriceMovement.UP, PriceMovement.UP],
+                            right_border=[PriceMovement.DOWN, PriceMovement.DOWN])
+
+        self.assertEqual(actual.compare_borders(expected), True)
 
 
 if __name__ == '__main__':
