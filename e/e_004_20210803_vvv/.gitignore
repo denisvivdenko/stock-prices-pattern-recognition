@@ -1,3 +1,5 @@
 *.mq4
 *.bat
 *.vim
+mylib.py
+test.db
