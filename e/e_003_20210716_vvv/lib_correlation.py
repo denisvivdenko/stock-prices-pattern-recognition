@@ -6,6 +6,10 @@
 import math
 from numba import njit
 
+def getCorrelationStumpy(a, b):
+  '''https://stumpy.readthedocs.io/en/latest/Tutorial_The_Matrix_Profile.html'''
+  return (sum([(b[i] - a[i])**2 for i in range(len(a))]))**0.5
+
 # @njit(parallel=True)
 def getCorrelationPearson(a, b):
   '''Коефіцієнт кореляції Пірсона (r-Пірсона) використовується 
